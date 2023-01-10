@@ -10,9 +10,21 @@
   }
 }
 
-.use {
-  stroke-dasharray: 1 10;
+.use1 {
+  stroke-dasharray: 1 6;
   fill: none;
   stroke-width: 1px;
-  stroke: rgba(255, 255, 255, 0.5);
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+.use2 {
+  stroke-dasharray: 1 12;
+  fill: none;
+  stroke-width: 1px;
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  /* border: 1px solid red; */
 }
