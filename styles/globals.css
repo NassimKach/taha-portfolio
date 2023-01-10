@@ -10,8 +10,9 @@
   }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.use {
+  stroke-dasharray: 1 10;
+  fill: none;
+  stroke-width: 1px;
+  stroke: rgba(255, 255, 255, 0.5);
 }
