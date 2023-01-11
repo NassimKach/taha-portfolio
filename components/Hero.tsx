@@ -1,20 +1,24 @@
 import { useState } from "react";
 import { IconArrowNarrowUp, IconArrowNarrowDown } from "@tabler/icons";
 
-const slides = [
-  {
-    id: 1,
-    title: "Makes and Distributes Video Content.",
-    bg: "../assets/hero-img.png",
-  },
-  {
-    id: 2,
-    title: "Makes and Distributes Video Content.",
-    bg: "../assets/hero-img.png",
-  },
-];
-
 function Hero() {
+  const slides = [
+    {
+      id: 1,
+      title: "Makes and Distributes Video Content.",
+      bg: "./hero-img.png",
+    },
+    {
+      id: 2,
+      title: "Makes and Distributes Video Content.",
+      bg: "./demo1-img.jpg",
+    },
+    {
+      id: 3,
+      title: "Makes and Distributes Video Content.",
+      bg: "./demo2-img.jpg",
+    },
+  ];
   const [count, setCount] = useState(1);
   const [rotate, setRotate] = useState(0);
 
@@ -47,7 +51,12 @@ function Hero() {
           <circle id="layer-name" cx="60" cy="60" r="58"></circle>
         </symbol>
       </svg>
-      <div className="bg-[url('../assets/hero-img.png')] bg-cover bg-no-repeat absolute w-[70%] h-screen top-0 right-0 grayscale"></div>
+      <div
+        className={`bg-cover bg-no-repeat absolute w-[70%] h-screen top-0 right-0 grayscale`}
+        style={{
+          backgroundImage: `url(${slides[count - 1].bg})`,
+        }}
+      ></div>
       <div className="max-w-7xl mx-auto h-screen flex justify-center flex-row gap-8 items-start">
         <div className="circle-navigation h-screen">
           <svg
@@ -61,9 +70,9 @@ function Hero() {
             <use xlinkHref="#dotted-circle" className="use1"></use>
           </svg>
           <svg
-            className="c-outer absolute  transition-all duration-[1s] w-[250px] h-[250px] ease-in-out"
+            className="absolute  transition-all duration-[1s] w-[250px] h-[250px] ease-in-out"
             style={{
-              transform: `translate(-50%, -50%) rotate(-${rotate}deg)`,
+              transform: `translate(-50%, -50%) rotate(${-rotate}deg)`,
               top: "50%",
               left: "0%",
             }}
