@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { IconArrowNarrowUp, IconArrowNarrowDown } from "@tabler/icons";
 import { gsap } from "gsap";
 
@@ -24,11 +24,18 @@ function Hero() {
   const [rotate, setRotate] = useState(0);
 
   if (typeof window !== "undefined") {
-    useLayoutEffect(() => {
-      gsap.from(".bg-cover", {
+    useEffect(() => {
+      //gsap timeline
+      const tl = gsap.timeline({
+        defaults: { ease: "power4.inOut" },
+      });
+
+      tl.to(".slider", {
+        width: "100%",
         duration: 1,
-        ease: "power4.out",
-        scale: 1.2,
+      }).to(".slider", {
+        width: "30%",
+        duration: 1,
       });
     }, [count]);
   }
@@ -66,8 +73,11 @@ function Hero() {
         className={`bg-cover bg-no-repeat absolute w-[70%] h-screen top-0 right-0 grayscale`}
         style={{
           backgroundImage: `url(${slides[count - 1].bg}`,
+          transitionDelay: "1s",
         }}
       ></div>
+      <div className="slider fixed w-[30%] h-screen top-0 left-0 bg-[#1A1A1A] "></div>
+      {/* <div className="slider2 fixed w-[70%] h-screen top-0 right-0 bg-[#1A1A1A] "></div> */}
       <div className="max-w-7xl mx-auto h-screen flex justify-center flex-row gap-8 items-start">
         <div className="circle-navigation h-screen">
           <svg
@@ -115,7 +125,7 @@ function Hero() {
             />
           </div>
         </div>
-        <div className="flex flex-col z-50 w-full h-full items-start justify-center pl-[10rem]">
+        <div className="flex flex-col  w-full h-full items-start justify-center pl-[10rem] z-10">
           <h1 className="font-bold text-6xl text-white">
             <span className="text-inherit select-none">
               Makes and Distributes
