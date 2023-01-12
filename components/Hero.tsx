@@ -1,26 +1,37 @@
-import { useState } from "react";
+import { useState, useLayoutEffect } from "react";
 import { IconArrowNarrowUp, IconArrowNarrowDown } from "@tabler/icons";
+import { gsap } from "gsap";
 
+const slides = [
+  {
+    id: 1,
+    title: "Makes and Distributes Video Content.",
+    bg: "./hero-img.png",
+  },
+  {
+    id: 2,
+    title: "Makes and Distributes Video Content.",
+    bg: "./demo1-img.jpg",
+  },
+  {
+    id: 3,
+    title: "Makes and Distributes Video Content.",
+    bg: "./demo2-img.jpg",
+  },
+];
 function Hero() {
-  const slides = [
-    {
-      id: 1,
-      title: "Makes and Distributes Video Content.",
-      bg: "./hero-img.png",
-    },
-    {
-      id: 2,
-      title: "Makes and Distributes Video Content.",
-      bg: "./demo1-img.jpg",
-    },
-    {
-      id: 3,
-      title: "Makes and Distributes Video Content.",
-      bg: "./demo2-img.jpg",
-    },
-  ];
   const [count, setCount] = useState(1);
   const [rotate, setRotate] = useState(0);
+
+  if (typeof window !== "undefined") {
+    useLayoutEffect(() => {
+      gsap.from(".bg-cover", {
+        duration: 1,
+        ease: "power4.out",
+        scale: 1.2,
+      });
+    }, [count]);
+  }
 
   const handleArrowUpClick = () => {
     if (count === 1) {
@@ -41,7 +52,7 @@ function Hero() {
   };
 
   return (
-    <div className="bg-[#1A1A1A]">
+    <div className="bg-[#1A1A1A] ">
       <svg className="hidden" width="0" height="0">
         <symbol
           id="dotted-circle"
@@ -54,7 +65,7 @@ function Hero() {
       <div
         className={`bg-cover bg-no-repeat absolute w-[70%] h-screen top-0 right-0 grayscale`}
         style={{
-          backgroundImage: `url(${slides[count - 1].bg})`,
+          backgroundImage: `url(${slides[count - 1].bg}`,
         }}
       ></div>
       <div className="max-w-7xl mx-auto h-screen flex justify-center flex-row gap-8 items-start">
@@ -87,6 +98,7 @@ function Hero() {
               opacity={0.3}
               onClick={handleArrowUpClick}
               cursor="pointer"
+              className="hover:text[#] transition-all duration-[1s] ease-in-out"
             />
           </div>
           <div className="counter text-white text-xl font-medium">
