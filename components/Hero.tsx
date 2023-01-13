@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import { IconArrowNarrowUp, IconArrowNarrowDown } from "@tabler/icons";
 import { gsap } from "gsap";
 
@@ -23,22 +23,19 @@ function Hero() {
   const [count, setCount] = useState(1);
   const [rotate, setRotate] = useState(0);
 
-  if (typeof window !== "undefined") {
-    useEffect(() => {
-      //gsap timeline
-      const tl = gsap.timeline({
-        defaults: { ease: "power4.inOut" },
-      });
-
-      tl.to(".slider", {
-        width: "100%",
-        duration: 1,
-      }).to(".slider", {
-        width: "30%",
-        duration: 1,
-      });
-    }, [count]);
-  }
+  useLayoutEffect(() => {
+    //gsap timeline
+    const tl = gsap.timeline({
+      defaults: { ease: "power4.inOut" },
+    });
+    tl.to(".slider", {
+      width: "100%",
+      duration: 1,
+    }).to(".slider", {
+      width: "30%",
+      duration: 1,
+    });
+  }, [count]);
 
   const handleArrowUpClick = () => {
     if (count === 1) {
@@ -70,13 +67,12 @@ function Hero() {
         </symbol>
       </svg>
       <div
-        className={`bg-cover bg-no-repeat absolute w-[70%] h-screen top-0 right-0 grayscale`}
+        className={`bg-cover bg-no-repeat absolute w-[70%] h-screen top-0 right-0 grayscale delay-[1s] transition-all ease-in-out`}
         style={{
           backgroundImage: `url(${slides[count - 1].bg}`,
-          transitionDelay: "1s",
         }}
       ></div>
-      <div className="slider fixed w-[30%] h-screen top-0 left-0 bg-[#1A1A1A] "></div>
+      <div className="slider fixed h-screen top-0 left-0 bg-[#1A1A1A] "></div>
       {/* <div className="slider2 fixed w-[70%] h-screen top-0 right-0 bg-[#1A1A1A] "></div> */}
       <div className="max-w-7xl mx-auto h-screen flex justify-center flex-row gap-8 items-start">
         <div className="circle-navigation h-screen">
