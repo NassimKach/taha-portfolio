@@ -31,10 +31,27 @@ function Hero() {
     tl.to(".slider", {
       width: "100%",
       duration: 1,
-    }).to(".slider", {
-      width: "30%",
-      duration: 1,
-    });
+    })
+      .to(".slider", {
+        width: "30%",
+        duration: 1,
+      })
+      .to(
+        ".slider2",
+        {
+          width: "100%",
+          duration: 1,
+        },
+        "-=2"
+      )
+      .to(
+        ".slider2",
+        {
+          width: "0%",
+          duration: 1.2,
+        },
+        "-=1"
+      );
   }, [count]);
 
   const handleArrowUpClick = () => {
@@ -72,8 +89,8 @@ function Hero() {
           backgroundImage: `url(${slides[count - 1].bg}`,
         }}
       ></div>
+      <div className="slider2 fixed h-screen top-0 left-0 bg-[#DC493A] "></div>
       <div className="slider fixed h-screen top-0 left-0 bg-[#1A1A1A] "></div>
-      {/* <div className="slider2 fixed w-[70%] h-screen top-0 right-0 bg-[#1A1A1A] "></div> */}
       <div className="max-w-7xl mx-auto h-screen flex justify-center flex-row gap-8 items-start">
         <div className="circle-navigation h-screen">
           <svg
