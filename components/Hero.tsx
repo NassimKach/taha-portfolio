@@ -1,29 +1,33 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { IconArrowNarrowUp, IconArrowNarrowDown } from "@tabler/icons";
 import { gsap } from "gsap";
 
 const slides = [
   {
     id: 1,
-    title: "Makes and Distributes Video Content.",
+    title: "Makes and Distributes",
+    subTitle: "Video Content 1.",
     bg: "./hero-img.png",
   },
   {
     id: 2,
-    title: "Makes and Distributes Video Content.",
+    title: "Makes and Distributes2",
+    subTitle: "Video Content 2.",
     bg: "./demo1-img.jpg",
   },
   {
     id: 3,
-    title: "Makes and Distributes Video Content.",
+    title: "Makes and Distributes3",
+    subTitle: "Video Content 3.",
     bg: "./demo2-img.jpg",
   },
 ];
 function Hero() {
   const [count, setCount] = useState(1);
   const [rotate, setRotate] = useState(0);
+  const [text, setText] = useState("Makes and Distributes");
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     //gsap timeline
     const tl = gsap.timeline({
       defaults: { ease: "power4.inOut" },
@@ -51,7 +55,21 @@ function Hero() {
           duration: 1.2,
         },
         "-=1"
-      );
+      )
+      .fromTo(".hide", { y: "-200%" }, { y: "0%", duration: 0.2 }, "-=1.5");
+  }, [count]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (count === 1) {
+        setText("Makes and Distributes");
+      } else if (count === 2) {
+        setText("Makes and Distributes2");
+      } else {
+        setText("Makes and Distributes3");
+      }
+    }, 1000);
+    return () => clearTimeout(timer);
   }, [count]);
 
   const handleArrowUpClick = () => {
@@ -61,6 +79,7 @@ function Hero() {
       setCount(count - 1);
     }
     setRotate(rotate + 10);
+    // set timer to change text
   };
 
   const handleArrowDownClick = () => {
@@ -94,7 +113,7 @@ function Hero() {
       <div className="max-w-7xl mx-auto h-screen flex justify-center flex-row gap-8 items-start">
         <div className="circle-navigation h-screen">
           <svg
-            className="absolute w-[350px] h-[350px]  transition-all duration-[1s] ease-in-out"
+            className="absolute w-[350px] h-[350px] transition-all duration-[1s] ease-in-out"
             style={{
               transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
               top: "50%",
@@ -138,13 +157,13 @@ function Hero() {
             />
           </div>
         </div>
-        <div className="flex flex-col  w-full h-full items-start justify-center pl-[10rem] z-10">
+        <div className="flex flex-col w-full h-full items-start justify-center pl-[10rem] z-10 ">
           <h1 className="font-bold text-6xl text-white">
-            <span className="text-inherit select-none">
-              Makes and Distributes
+            <span className="text-inherit select-none inline-flex hide transition-all ease-in-out duration-[1s]">
+              {text}
             </span>
             <br />
-            Video Content.
+            Video Content
           </h1>
 
           <a
