@@ -79,7 +79,6 @@ function Hero() {
       setCount(count - 1);
     }
     setRotate(rotate + 10);
-    // set timer to change text
   };
 
   const handleArrowDownClick = () => {
@@ -103,14 +102,14 @@ function Hero() {
         </symbol>
       </svg>
       <div
-        className={`bg-cover bg-no-repeat absolute w-[70%] h-screen top-0 right-0 grayscale delay-[1s] transition-all ease-in-out`}
+        className="bg-cover bg-no-repeat absolute w-[70%] h-screen top-0 right-0 grayscale delay-[1s] transition-all ease-in-out"
         style={{
           backgroundImage: `url(${slides[count - 1].bg}`,
         }}
       ></div>
-      <div className="slider2 fixed h-screen top-0 left-0 bg-[#DC493A] "></div>
-      <div className="slider fixed h-screen top-0 left-0 bg-[#1A1A1A] "></div>
-      <div className="max-w-7xl mx-auto h-screen flex justify-center flex-row gap-8 items-start">
+      <div className="slider2 absolute h-screen top-0 left-0 bg-[#DC493A] "></div>
+      <div className="slider absolute h-screen top-0 left-0 bg-[#1A1A1A] "></div>
+      <div className="max-w-7xl mx-auto h-screen flex justify-center flex-row items-start">
         <div className="circle-navigation h-screen">
           <svg
             className="absolute w-[350px] h-[350px] transition-all duration-[1s] ease-in-out"
@@ -123,7 +122,7 @@ function Hero() {
             <use xlinkHref="#dotted-circle" className="use1"></use>
           </svg>
           <svg
-            className="absolute  transition-all duration-[1s] w-[250px] h-[250px] ease-in-out"
+            className="absolute transition-all duration-[1s] w-[250px] h-[250px] ease-in-out"
             style={{
               transform: `translate(-50%, -50%) rotate(${-rotate}deg)`,
               top: "50%",
@@ -133,7 +132,7 @@ function Hero() {
             <use xlinkHref="#dotted-circle" className="use2"></use>
           </svg>
         </div>
-        <div className="wrap absolute justify-center h-full left-5 flex flex-col items-center ">
+        <div className="wrap absolute justify-center h-full left-5 flex flex-col items-center z-[999]">
           <div>
             <IconArrowNarrowUp
               color="#fff"
@@ -158,7 +157,7 @@ function Hero() {
           </div>
         </div>
         <div className="flex flex-col w-full h-full items-start justify-center pl-[10rem] z-10 ">
-          <h1 className="font-bold text-6xl text-white">
+          <h1 className="font-bold text-6xl text-white overflow-hidden">
             <span className="text-inherit select-none inline-flex hide transition-all ease-in-out duration-[1s]">
               {text}
             </span>
