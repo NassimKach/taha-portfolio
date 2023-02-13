@@ -22,10 +22,11 @@ const slides = [
     bg: "./demo2-img.jpg",
   },
 ];
+
 function Hero() {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
+  const [slide, setSlide] = useState(slides[0]);
   const [rotate, setRotate] = useState(0);
-  const [text, setText] = useState("Makes and Distributes");
 
   useEffect(() => {
     //gsap timeline
@@ -61,20 +62,14 @@ function Hero() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (count === 1) {
-        setText("Makes and Distributes");
-      } else if (count === 2) {
-        setText("Makes and Distributes2");
-      } else {
-        setText("Makes and Distributes3");
-      }
+      setSlide(slides[count]);
     }, 1000);
     return () => clearTimeout(timer);
   }, [count]);
 
   const handleArrowUpClick = () => {
-    if (count === 1) {
-      setCount(3);
+    if (count === 0) {
+      setCount(2);
     } else {
       setCount(count - 1);
     }
@@ -82,7 +77,7 @@ function Hero() {
   };
 
   const handleArrowDownClick = () => {
-    if (count === 3) {
+    if (count === 2) {
       setCount(1);
     } else {
       setCount(count + 1);
@@ -104,7 +99,7 @@ function Hero() {
       <div
         className="bg-cover bg-no-repeat absolute w-[70%] h-screen top-0 right-0 grayscale delay-[1s] transition-all ease-in-out"
         style={{
-          backgroundImage: `url(${slides[count - 1].bg}`,
+          backgroundImage: `url(${slide.bg}`,
         }}
       ></div>
       <div className="slider2 absolute h-screen top-0 left-0 bg-[#DC493A] "></div>
@@ -143,7 +138,7 @@ function Hero() {
             />
           </div>
           <div className="counter text-white text-xl font-medium">
-            <span>0{count}</span>
+            <span>0{count + 1}</span>
             <span className="sep opacity-30">/</span>
             <span className="total opacity-30">03</span>
           </div>
@@ -159,10 +154,10 @@ function Hero() {
         <div className="flex flex-col w-full h-full items-start justify-center pl-[10rem] z-10 ">
           <h1 className="font-bold text-6xl text-white overflow-hidden">
             <span className="text-inherit select-none inline-flex hide transition-all ease-in-out duration-[1s]">
-              {text}
+              {slide.title}
             </span>
             <br />
-            Video Content
+            {slide.subTitle}
           </h1>
 
           <a
